@@ -3,7 +3,8 @@ FROM debian:stretch
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update && \
-    ap-get install -y build-essential \
+    apt-get install -y \
+    build-essential \
     wget \
     git \
     python3 \
