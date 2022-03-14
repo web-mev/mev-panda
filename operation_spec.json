@@ -1,0 +1,48 @@
+{
+    "name": "PANDA (Regulatory Networks)", 
+    "description": "PANDA (Passing Attributes between Networks for Data Assimilation) is a message-passing model that uses multiple sources of information (e.g. protein-protein interaction data and gene co-expression), to predict genome-wide, condition-specific regulatory networks. Further information is available at <a href=\"https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064832\">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064832</a>", 
+    "inputs": {
+        "MevPanda.exprs_file": {
+            "description": "The input matrix- a gene expression matrix for a cohort of samples.", 
+            "name": "Input matrix:", 
+            "required": true, 
+            "spec": {
+                "attribute_type": "VariableDataResource", 
+                "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
+                "many": false
+            }
+        }, 
+        "MevPanda.ppi_file": {
+            "description":"(Optional) A 3-column protein-protein interaction file providing a transcription factor, a gene, and a number between zero and one which represents the strength of evidence for their interaction. We provide a default which is suitable for most cases.",
+            "name":"Protein-protein interactions:",
+            "required": false,
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "FT", 
+                "many": false
+            }
+        },
+        "MevPanda.motif_file": {
+            "description":"(Optional) A 3-column file which provides information about transcription factor binding motifs present in the gene. The first column provides the transcription factor, the second provides the gene, and the third column is 0 or 1, depending on whether the TF-binding motif exists (1) or not (0).",
+            "name":"TF motifs:",
+            "required": false,
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "FT", 
+                "many": false
+            }
+        }
+    }, 
+    "outputs": {
+        "MevPanda.panda_output_matrix": {
+            "required": true,
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "FT",
+                "many": false
+            }
+        }
+    }, 
+    "mode": "cromwell",
+    "workspace_operation": true
+}
