@@ -8,7 +8,7 @@ DEFAULT_MOTIF_FILE = '/opt/software/resources/tissues_motif.tsv'
 DEFAULT_PPI_FILE = '/opt/software/resources/tissues_ppi.tsv'
 
 # maximum number of rows to keep
-NMAX = 1.5e4
+NMAX = 15000
 
 def handle_dummy_args(args):
     '''
