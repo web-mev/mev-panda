@@ -78,7 +78,7 @@ def run_panda(args):
     out_mtx = pd.DataFrame(panda_obj.panda_network)
 
     # Get motif order
-    motif_names_ordered = motif_df[0].drop_duplicates(keep="first")
+    motif_names_ordered = motif_df['source'].drop_duplicates(keep="first")
     # Set headers and rownames to PANDA network
     out_mtx.set_index(motif_names_ordered, inplace=True)
     out_mtx.columns = exprs_df.index.values
