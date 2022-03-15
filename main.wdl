@@ -37,12 +37,12 @@ task runPanda {
         python3 /opt/software/panda.py \
             --motif ${motif_file} \
             --ppi ${ppi_file} \
-            --output ${output_name}
+            --output ${output_name} \
             ${exprs_file}
     }
 
     output {
-        File panda_output_matrix = ${output_name}
+        File panda_output_matrix = "${output_name}"
     }
 
     runtime {

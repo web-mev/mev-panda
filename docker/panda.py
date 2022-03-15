@@ -7,6 +7,9 @@ import sys
 DEFAULT_MOTIF_FILE = '/opt/software/resources/tissues_motif.tsv'
 DEFAULT_PPI_FILE = '/opt/software/resources/tissues_ppi.tsv'
 
+# maximum number of rows to keep
+NMAX = 1.5e4
+
 def handle_dummy_args(args):
     '''
     Since this script is called by WDL, we need to handle
@@ -39,6 +42,21 @@ def run_panda(args):
 
     # Adding headers for the PANDAs obj to read
     motif_df.columns =['source','target','weight']
+
+    # subset the expression dataframe to retain only the top NMAX
+    # by mean expression. Otherwise, memory consumption is too much.
+
+    # covering a very fringe case here where this column might 
+    # already be in the matrix. Just keep adding underscores to 
+    # create a unique column name for the row-mean values.
+    mean_col_name = '__mean__'
+    while mean_col_name in exprs_df.columns:
+        mean_col_name = '_' + mean_col_name + '_'
+    exprs_df[mean_col_name] = exprs_df.apply(lambda x: x.mean(), axis=1)
+
+    # retain only the top NMAX and drop that mean value column since we're done with it.
+    exprs_df = exprs_df.nlargest(NMAX, mean_col_name)
+    exprs_df.drop(mean_col_name, axis=1, inplace=True)
 
     # Running pandas with default expected paramaters
     # save_memory = False results in outputting the PANDA network in edge format
