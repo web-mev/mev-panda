@@ -16,6 +16,10 @@ RUN mkdir -p /opt/software/resources
 ADD panda.py /opt/software/ 
 
 # Copy the bucket-based file into this Docker:
+# Note that for the WDL run, these files will be addressed directly.
+# However, failure of this step in the Docker build (e.g. as part of CI tools)
+# will indicate that the files are missing and something is wrong.
+# So this serves as a pre-check.
 RUN wget https://storage.googleapis.com/mev-public-data/tissues_ppi.tsv -O /opt/software/resources/tissues_ppi.tsv
 RUN wget https://storage.googleapis.com/mev-public-data/tissues_motif.tsv -O /opt/software/resources/tissues_motif.tsv
 

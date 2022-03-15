@@ -3,10 +3,10 @@ workflow MevPanda {
     # A motif file. Since this is optional, we provide
     # a default 'value'. This is b/c of how WDL handles
     # optional args in the command section (it doesn't)
-    File? motif_file = "__motif__"
+    File? motif_file = "gs://mev-public-data/tissues_motif.tsv"
 
     # A PPI file. Optional. same as above
-    File? ppi_file = "__ppi__"
+    File? ppi_file = "gs://mev-public-data/tissues_ppi.tsv"
 
     # A user uploaded exprs count matrix
     File exprs_file
