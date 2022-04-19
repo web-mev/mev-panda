@@ -24,10 +24,10 @@ RUN wget https://storage.googleapis.com/mev-public-data/tissues_ppi.tsv -O /opt/
 RUN wget https://storage.googleapis.com/mev-public-data/tissues_motif.tsv -O /opt/software/resources/tissues_motif.tsv
 
 # Install the NetZoo python library
-RUN wget https://github.com/netZoo/netZooPy/archive/refs/tags/0.8.1.tar.gz \
+RUN wget https://github.com/netZoo/netZooPy/archive/refs/tags/0.9.3.tar.gz \
     -P /opt/software && \
-    tar xzvf /opt/software/0.8.1.tar.gz -C /opt/software && \
-    pip3 install -e /opt/software/netZooPy-0.8.1/ 
+    tar xzvf /opt/software/0.9.3.tar.gz -C /opt/software && \
+    pip3 install -e /opt/software/netZooPy-0.9.3/ 
     
 RUN pip3 install joblib
 
