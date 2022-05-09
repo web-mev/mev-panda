@@ -38,7 +38,7 @@
             "required": true,
             "spec": {
                 "attribute_type": "DataResource", 
-                "resource_type": "FT",
+                "resource_type": "NS",
                 "many": false
             }
         }
