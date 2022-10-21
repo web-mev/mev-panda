@@ -50,6 +50,5 @@ task runPanda {
         cpu: 8
         memory: "62 G"
         disks: "local-disk " + disk_size + " HDD"
-        preemptible: 0
     }
 }
