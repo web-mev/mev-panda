@@ -7,8 +7,6 @@ import sys
 DEFAULT_MOTIF_FILE = '/opt/software/resources/tissues_motif.tsv'
 DEFAULT_PPI_FILE = '/opt/software/resources/tissues_ppi.tsv'
 
-# maximum number of rows to keep
-NMAX = 100000
 
 def handle_dummy_args(args):
     '''
@@ -55,7 +53,7 @@ def run_panda(args):
     exprs_df[mean_col_name] = exprs_df.apply(lambda x: x.mean(), axis=1)
 
     # retain only the top NMAX and drop that mean value column since we're done with it.
-    exprs_df = exprs_df.nlargest(NMAX, mean_col_name)
+    exprs_df = exprs_df.nlargest(args.nmax, mean_col_name)
     exprs_df.drop(mean_col_name, axis=1, inplace=True)
 
     # Running pandas with default expected paramaters
@@ -109,6 +107,15 @@ def main():
         required=False, \
         default = DEFAULT_PPI_FILE, \
         help="PPI data"
+    )
+
+    parser.add_argument(
+        "--nmax", \
+        type=int, \
+        metavar="INT", \
+        required=False, \
+        default = 25000, \
+        help="Max number of genes to consider. We take the top N by row-mean."
     )
 
     parser.add_argument(

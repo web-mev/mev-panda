@@ -30,6 +30,10 @@ task runPanda {
     File ppi_file
     File exprs_file
 
+    # Don't want to expose this as user-defined variable, but want the 
+    # flexibility to easily change it without a container rebuild.
+    Int nmax = 25000
+
     String output_name = "panda_network.tsv"
     Int disk_size = 40
 
@@ -38,6 +42,7 @@ task runPanda {
             --motif ${motif_file} \
             --ppi ${ppi_file} \
             --output ${output_name} \
+            --nmax ${nmax} \
             ${exprs_file}
     }
 
