@@ -1,5 +1,4 @@
 {
     "MevPanda.exprs_file": "File", 
-    "MevPanda.ppi_file": "File",
-    "MevPanda.motif_file": "File"
+    "MevPanda.identifier_choice": "String"
 }

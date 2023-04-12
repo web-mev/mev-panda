@@ -1,12 +1,17 @@
 workflow MevPanda {
 
-    # A motif file. Since this is optional, we provide
-    # a default 'value'. This is b/c of how WDL handles
-    # optional args in the command section (it doesn't)
-    File? motif_file = "s3://webmev-public/tissues_motif.tsv"
+    String identifier_choice
 
-    # A PPI file. Optional. same as above
-    File? ppi_file = "s3://webmev-public/tissues_ppi.tsv"
+    Map[String, File] motifMap = {
+        "Symbol":"s3://webmev-public/tissues_motif.symbol.tsv",
+        "Ensembl":"s3://webmev-public/tissues_motif.ensg.tsv"
+    }
+
+    File motif_file = motifMap[identifier_choice]
+
+    # A PPI file. Since the matrix from this file does not multiply
+    # with the expression matrix, we do not need an "identifier-specific" version
+    File ppi_file = "s3://webmev-public/tissues_ppi.tsv"
 
     # A user uploaded exprs count matrix
     File exprs_file
@@ -52,8 +57,8 @@ task runPanda {
 
     runtime {
         docker: "ghcr.io/web-mev/mev-panda"
-        cpu: 8
-        memory: "62 G"
+        cpu: 16
+        memory: "120 G"
         disks: "local-disk " + disk_size + " HDD"
     }
 }
