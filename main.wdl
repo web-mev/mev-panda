@@ -43,7 +43,7 @@ task runPanda {
     Int disk_size = 40
 
     command {
-        python3 /opt/software/panda.py \
+        python3 /usr/local/bin/panda.py \
             --motif ${motif_file} \
             --ppi ${ppi_file} \
             --output ${output_name} \
