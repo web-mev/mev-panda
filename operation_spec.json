@@ -2,18 +2,18 @@
     "name": "PANDA (Regulatory Networks)", 
     "description": "PANDA (Passing Attributes between Networks for Data Assimilation) is a message-passing model that uses multiple sources of information (e.g. protein-protein interaction data and gene co-expression), to predict genome-wide, condition-specific regulatory networks. Further information is available at <a href=\"https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064832\">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0064832</a><br/>Note that if you want to use this tool for non-human data, you will need to first map to orthologous human genes due to PANDA's dependence on human-derived TF motif and protein-protein interaction data.", 
     "inputs": {
-        "MevPanda.exprs_file": {
+        "exprs_file": {
             "description": "The input matrix- a gene expression matrix for a cohort of samples.", 
             "name": "Input matrix:", 
             "required": true, 
-            "converter": "api.converters.data_resource.CromwellSingleVariableDataResourceConverter",
+            "converter": "api.converters.data_resource.RemoteNextflowSingleVariableDataResourceConverter",
             "spec": {
                 "attribute_type": "VariableDataResource", 
                 "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
                 "many": false
             }
         }, 
-        "MevPanda.identifier_choice": {
+        "identifier_choice": {
             "description":"Which gene identifiers are used in your expression matrix? Symbols correspond with common gene names while Ensembl identifiers start with ENSG.",
             "name":"Gene identifier:",
             "required": true,
@@ -27,7 +27,7 @@
     "outputs": {
         "MevPanda.panda_output_matrix": {
             "required": true,
-            "converter": "api.converters.data_resource.CromwellSingleDataResourceConverter",
+            "converter": "api.converters.data_resource.RemoteNextflowSingleDataResourceConverter",
             "spec": {
                 "attribute_type": "DataResource", 
                 "resource_type": "NS",
@@ -35,6 +35,6 @@
             }
         }
     }, 
-    "mode": "cromwell",
+    "mode": "nf_batch",
     "workspace_operation": true
 }
