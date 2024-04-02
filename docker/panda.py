@@ -52,6 +52,7 @@ def run_panda(args):
         )
     except Exception as ex:
         sys.stdout.write(f'Error" {ex}')
+        sys.exit(1)
 
     # Pull PANDA network out of object
     out_mtx = pd.DataFrame(panda_obj.panda_network)
