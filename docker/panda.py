@@ -1,4 +1,4 @@
-
+import sys
 import argparse
 from netZooPy.panda import Panda
 import pandas as pd
@@ -40,15 +40,19 @@ def run_panda(args):
     # LIONESS requires keep_expression_matrix
     # Default modeProcess blows memory stack, so have to use "legacy".
     # Pass the pandas dataframes directly rather than the PATHs.
-    panda_obj = Panda(
-        exprs_df,
-        motif_df,
-        ppi_df,
-        remove_missing=False,
-        keep_expression_matrix=True,
-        save_memory=False,
-        modeProcess="legacy"
-    )
+    try:
+        panda_obj = Panda(
+            exprs_df,
+            motif_df,
+            ppi_df,
+            remove_missing=False,
+            keep_expression_matrix=True,
+            save_memory=False,
+            modeProcess="legacy"
+        )
+    except Exception as ex:
+        sys.stdout.write(f'Error" {ex}')
+
     # Pull PANDA network out of object
     out_mtx = pd.DataFrame(panda_obj.panda_network)
 
